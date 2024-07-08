@@ -1,46 +1,49 @@
-export const ACTION_SET_FROM = 'SEI_FROM'
-export const ACTION_SET_TO = 'SET_TO'
-export const ACTION_SET_IS_CITY_SELECTOR_VISIBLE = 'SET_IS_CITY_SELECTOR_VISIBLE'
-export const ACTION_SET_CURRENT_SELECTING_LEFT_CITY = 'SET_CURRENT_SELECTING_LEFT_CITY'
-export const ACTION_SET_CITY_DATA = 'SET_CITY_DATA'
-export const ACTION_SET_IS_LOADING_CITY_DATA = 'SET_IS_LOADING_CITY_DATA'
-export const ACTION_SET_IS_DATE_SELECTOR_VISIBLE = 'SET_IS_DATE_SELECTOR_VISIBLE'
-export const ACTION_SET_HIGH_SPEED = 'SET_HIGH_SPEED'
+export const ACTION_SET_FROM = 'SEI_FROM';
+export const ACTION_SET_TO = 'SET_TO';
+export const ACTION_SET_IS_CITY_SELECTOR_VISIBLE =
+    'SET_IS_CITY_SELECTOR_VISIBLE';
+export const ACTION_SET_CURRENT_SELECTING_LEFT_CITY =
+    'SET_CURRENT_SELECTING_LEFT_CITY';
+export const ACTION_SET_CITY_DATA = 'SET_CITY_DATA';
+export const ACTION_SET_IS_LOADING_CITY_DATA = 'SET_IS_LOADING_CITY_DATA';
+export const ACTION_SET_IS_DATE_SELECTOR_VISIBLE =
+    'SET_IS_DATE_SELECTOR_VISIBLE';
+export const ACTION_SET_HIGH_SPEED = 'SET_HIGH_SPEED';
 export const ACTION_SET_DEPART_DATE = 'SET_DEPART_DATE';
 
 export function setFrom(from) {
     return {
         type: ACTION_SET_FROM,
-        payload: from
-    }
+        payload: from,
+    };
 }
 
 export function setTo(to) {
     return {
         type: ACTION_SET_TO,
-        payload: to
-    }
+        payload: to,
+    };
 }
 
 export function setIsLoadingCityData(isLoadingCityData) {
     return {
         type: ACTION_SET_IS_LOADING_CITY_DATA,
-        payload: isLoadingCityData
-    }
+        payload: isLoadingCityData,
+    };
 }
 
 export function setCurrentSelectingLeftCity(currentSelectingLeftCity) {
     return {
         type: ACTION_SET_CURRENT_SELECTING_LEFT_CITY,
-        payload: currentSelectingLeftCity
-    }
+        payload: currentSelectingLeftCity,
+    };
 }
 
 export function setCityData(cityData) {
     return {
         type: ACTION_SET_CITY_DATA,
-        payload: cityData
-    }
+        payload: cityData,
+    };
 }
 
 export function toggleHighSpeed() {
@@ -54,36 +57,36 @@ export function toggleHighSpeed() {
 }
 
 export function showCitySelector(currentSelectingLeftCity) {
-    return (dispatch) => {
+    return dispatch => {
         dispatch({
             type: ACTION_SET_IS_CITY_SELECTOR_VISIBLE,
-            payload: true
-        })
+            payload: true,
+        });
         dispatch({
             type: ACTION_SET_CURRENT_SELECTING_LEFT_CITY,
-            payload: currentSelectingLeftCity
-        })
-    }
+            payload: currentSelectingLeftCity,
+        });
+    };
 }
 
 export function hideCitySelector() {
-    window.console.log('333')
+    window.console.log('333');
     return {
         type: ACTION_SET_IS_CITY_SELECTOR_VISIBLE,
-        payload: false
-    }
+        payload: false,
+    };
 }
 
 export function setSelectedCity(city) {
     return (dispatch, getState) => {
-        const {currentSelectingLeftCity} = getState()
-        if(currentSelectingLeftCity) {
-            dispatch(setFrom(city))
+        const { currentSelectingLeftCity } = getState();
+        if (currentSelectingLeftCity) {
+            dispatch(setFrom(city));
         } else {
-            dispatch(setTo(city))
+            dispatch(setTo(city));
         }
         dispatch(hideCitySelector());
-    }
+    };
 }
 
 // export function setIsDateSelectorVisible(isDateSelectorVisible) {
@@ -96,23 +99,23 @@ export function setSelectedCity(city) {
 export function showDateSelector() {
     return {
         type: ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
-        payload: true
-    }
+        payload: true,
+    };
 }
 
 export function hideDateSelector() {
     return {
         type: ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
-        payload: false
-    }
+        payload: false,
+    };
 }
 
 export function exchangeFromTo() {
     return (dispatch, getState) => {
-        const {from, to} = getState()
+        const { from, to } = getState();
         dispatch(setFrom(to));
-        dispatch(setTo(from))
-    }
+        dispatch(setTo(from));
+    };
 }
 
 export function setDepartDate(departDate) {
@@ -125,28 +128,34 @@ export function setDepartDate(departDate) {
 export function fetchCityData() {
     return (dispatch, getState) => {
         const { isLoadingCityData } = getState();
-        if(isLoadingCityData) {
+        if (isLoadingCityData) {
             return;
         }
 
-        const cache = JSON.parse(localStorage.getItem('city_data_cache') || '{}')
+        const cache = JSON.parse(
+            localStorage.getItem('city_data_cache') || '{}'
+        );
         if (Date.now() < cache.expires) {
-            dispatch(setCityData(cache.data))
-            return
+            dispatch(setCityData(cache.data));
+            return;
         }
 
-        dispatch(setIsLoadingCityData(true))
-        fetch('/rest/cities?_' + Date.now()).then(res => res.json())
-        .then(cityData => {
-                dispatch(setCityData(cityData))
-                localStorage.setItem('city_data_cache', 
-                JSON.stringify({
-                    expires: Date.now() + 60 * 1000,
-                    data: cityData
-                }))
-                dispatch(setIsLoadingCityData(false))
-            }).catch(() => {
-                dispatch(setIsLoadingCityData(false))
+        dispatch(setIsLoadingCityData(true));
+        fetch('/rest/cities?_' + Date.now())
+            .then(res => res.json())
+            .then(cityData => {
+                dispatch(setCityData(cityData));
+                localStorage.setItem(
+                    'city_data_cache',
+                    JSON.stringify({
+                        expires: Date.now() + 60 * 1000,
+                        data: cityData,
+                    })
+                );
+                dispatch(setIsLoadingCityData(false));
             })
-    }
+            .catch(() => {
+                dispatch(setIsLoadingCityData(false));
+            });
+    };
 }

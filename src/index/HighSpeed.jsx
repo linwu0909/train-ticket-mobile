@@ -1,8 +1,6 @@
-import React from 'react'
-import './HighSpeed.css'
+import React from 'react';
+import './HighSpeed.css';
 
 export default function HighSpeed(props) {
-    return (
-        <div></div>
-    )
+    return <div></div>;
 }

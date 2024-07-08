@@ -1,8 +1,6 @@
-import React from 'react'
-import './Submit.css'
+import React from 'react';
+import './Submit.css';
 
 export default function Submit(props) {
-    return (
-        <div></div>
-    )
+    return <div></div>;
 }

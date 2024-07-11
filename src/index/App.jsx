@@ -16,6 +16,7 @@ import {
     hideCitySelector,
     showCitySelector,
     fetchCityData,
+    setSelectedCity,
 } from './actions';
 function App(props) {
     const {
@@ -45,6 +46,7 @@ function App(props) {
             {
                 onBack: hideCitySelector,
                 fetchCityData,
+                onSelect: setSelectedCity,
             },
             dispatch
         );

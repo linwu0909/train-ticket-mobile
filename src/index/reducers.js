@@ -30,7 +30,6 @@ export default {
     },
     isCitySelectorVisible(state = false, action) {
         const { type, payload } = action;
-        window.console.log('aa', type, payload);
         switch (type) {
             case ACTION_SET_IS_CITY_SELECTOR_VISIBLE:
                 return payload;

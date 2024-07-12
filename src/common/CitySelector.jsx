@@ -45,7 +45,11 @@ CitySection.propTypes = {
 
 const AlphaIndex = memo(function AlphaIndex(props) {
     const { alpha, onClick } = props;
-    return <i className="city-index-item" onClick={() => onClick(alpha)} />;
+    return (
+        <i className="city-index-item" onClick={() => onClick(alpha)}>
+            {alpha}
+        </i>
+    );
 });
 
 const alphabet = Array.from(new Array(26), (ele, index) => {
@@ -183,7 +187,7 @@ const CitySelector = memo(function CitySelector(props) {
         if (cityData) {
             return (
                 <CityList
-                    sections={cityData.CityList}
+                    sections={cityData.cityList}
                     onSelect={onSelect}
                     toAlpha={toAlpha}
                 />
@@ -202,7 +206,7 @@ const CitySelector = memo(function CitySelector(props) {
                             stroke="#fff"
                             strokeWidth="2"
                             fill="none"
-                        ></polyline>
+                        />
                     </svg>
                 </div>
                 <div className="search-input-wrapper">

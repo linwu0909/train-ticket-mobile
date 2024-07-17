@@ -10,6 +10,7 @@ import Journey from './Journey';
 import Submit from './Submit';
 
 import CitySelector from '../common/CitySelector';
+import DateSelector from '../common/DateSelector';
 
 import {
     exchangeFromTo,
@@ -18,12 +19,14 @@ import {
     fetchCityData,
     setSelectedCity,
     showDateSelector,
+    hideDateSelector,
 } from './actions';
 function App(props) {
     const {
         from,
         to,
         isCitySelectorVisible,
+        isDateSelectorVisible,
         cityData,
         isLoadingCityData,
         dispatch,
@@ -63,6 +66,15 @@ function App(props) {
         );
     }, []);
 
+    const dateSelectorCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                onBack: hideDateSelector,
+            },
+            dispatch
+        );
+    }, []);
+
     return (
         <div className="App">
             <div className="header-wrapper">
@@ -80,6 +92,7 @@ function App(props) {
                 isLoading={isLoadingCityData}
                 {...citySelectorCbs}
             />
+            <DateSelector show={isDateSelectorVisible} {...dateSelectorCbs} />
         </div>
     );
 }

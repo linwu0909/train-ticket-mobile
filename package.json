@@ -1,5 +1,5 @@
 {
-  "name": "train-ticket",
+  "name": "train-ticket-mobile",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -62,7 +62,7 @@
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
-  "proxy": "http://39.96.69.24",
+  "proxy": "http://127.0.0.1:3001",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",

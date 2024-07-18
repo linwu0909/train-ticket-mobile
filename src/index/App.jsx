@@ -12,6 +12,8 @@ import Submit from './Submit';
 import CitySelector from '../common/CitySelector';
 import DateSelector from '../common/DateSelector';
 
+import { h0 } from '../common/fp';
+
 import {
     exchangeFromTo,
     hideCitySelector,
@@ -20,6 +22,8 @@ import {
     setSelectedCity,
     showDateSelector,
     hideDateSelector,
+    setDepartDate,
+    toggleHighSpeed,
 } from './actions';
 function App(props) {
     const {
@@ -31,6 +35,7 @@ function App(props) {
         isLoadingCityData,
         dispatch,
         departDate,
+        highSpeed,
     } = props;
     const onBack = useCallback(() => {
         window.history.back();
@@ -75,6 +80,26 @@ function App(props) {
         );
     }, []);
 
+    const highSpeedCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                toggle: toggleHighSpeed,
+            },
+            dispatch
+        );
+    }, []);
+
+    const onSelectDate = useCallback(day => {
+        if (!day) {
+            return;
+        }
+        if (day < h0()) {
+            return;
+        }
+        dispatch(setDepartDate(day));
+        dispatch(hideDateSelector());
+    }, []);
+
     return (
         <div className="App">
             <div className="header-wrapper">
@@ -83,7 +108,7 @@ function App(props) {
             <form className="form">
                 <Journey from={from} to={to} {...cbs} />
                 <DepartDate time={departDate} {...departDateCbs} />
-                <HighSpeed />
+                <HighSpeed highSpeed={highSpeed} {...highSpeedCbs} />
                 <Submit />
             </form>
             <CitySelector
@@ -92,7 +117,11 @@ function App(props) {
                 isLoading={isLoadingCityData}
                 {...citySelectorCbs}
             />
-            <DateSelector show={isDateSelectorVisible} {...dateSelectorCbs} />
+            <DateSelector
+                show={isDateSelectorVisible}
+                {...dateSelectorCbs}
+                onSelect={onSelectDate}
+            />
         </div>
     );
 }

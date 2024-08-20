@@ -31,18 +31,18 @@ const ListItem = memo(function ListItem(props) {
                 <span className="item-time">
                     <em>{dTime}</em>
                     <br />
-                    <em class="em-light">
+                    <em className="em-light">
                         {aTime}
                         <i className="time-after">{dayAfter}</i>
                     </em>
                 </span>
                 <span className="item-stations">
-                    <em class="em-light">
+                    <em className="em-light">
                         <i className="train-station train-start">始</i>
                         {dStation}
                     </em>
                     <br />
-                    <em class="em-light">
+                    <em className="em-light">
                         <i className="train-station train-end">终</i>
                         {aStation}
                     </em>
@@ -51,7 +51,7 @@ const ListItem = memo(function ListItem(props) {
                 <span className="item-train">
                     <em>{trainNumber}</em>
                     <br />
-                    <em class="em-light">{time}</em>
+                    <em className="em-light">{time}</em>
                 </span>
                 <span className="item-ticket">
                     <em>{priceMsg}</em>

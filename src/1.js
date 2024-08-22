@@ -13,8 +13,8 @@ function generateActionConstants(obj) {
             const actionValue = `SET_${toSnakeCaseUpper(key)}`;
 
             // 生成并拼接export语句
-            // constants += `export const ${constantKey} = '${actionValue}';\n`;
-            constants += `${constantKey},\n`;
+            constants += `export const ${constantKey} = '${actionValue}';\n`;
+            // constants += `${constantKey},\n`;
         }
     }
     return constants;
@@ -22,26 +22,16 @@ function generateActionConstants(obj) {
 
 // 示例用法
 const actionObj = {
-    from: null,
-    to: null,
-    departDate: '',
-    highSpeed: false,
-    trainList: [],
-    orderType: '',
-    onlyTickets: false,
-    ticketTypes: [],
-    checkedTicketTypes: {},
-    trainTypes: [],
-    checkedTrainTypes: {},
-    departStations: [],
-    checkedDepartStations: {},
-    arriveStations: [],
-    checkedArriveStations: {},
-    departTimeStart: 0,
-    departTimeEnd: 24,
-    arriveTimeStart: 0,
-    arriveTimeEnd: 24,
-    isFiltersVisible: false,
+    departDate: Date.now(),
+    arriveDate: Date.now(),
+    departTimeStr: null,
+    arriveTimeStr: null,
+    departStation: null,
+    arriveStation: null,
+    trainNumber: null,
+    durationStr: null,
+    tickets: [],
+    isScheduleVisible: false,
     searchParsed: false,
 };
 const actionConstants = generateActionConstants(actionObj);

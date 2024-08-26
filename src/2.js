@@ -26,16 +26,19 @@ function generateFunctionTemplates(actions) {
 
 // 示例对象
 const actions = {
+    trainNumber: null,
+    departStation: null,
+    arriveStation: null,
+    seatType: null,
     departDate: Date.now(),
     arriveDate: Date.now(),
     departTimeStr: null,
     arriveTimeStr: null,
-    departStation: null,
-    arriveStation: null,
-    trainNumber: null,
     durationStr: null,
-    tickets: [],
-    isScheduleVisible: false,
+    price: null,
+    passengers: [],
+    menu: null,
+    isMenuVisible: false,
     searchParsed: false,
 };
 

@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, useMemo, useReducer } from 'react';
+import React, { memo, useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import './Bottom.css';
 import classnames from 'classnames';

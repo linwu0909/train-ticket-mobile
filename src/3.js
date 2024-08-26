@@ -2,7 +2,7 @@ function toSnakeCaseUpper(str) {
     // 将驼峰命名转换为下划线命名，并转换为大写
     return str.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toUpperCase();
 }
-function generateReducerTemplates(keys, initialState = false) {
+function generateReducerTemplates(keys, initialState = null) {
     let template = '';
     const ACTION_PREFIX = 'ACTION_SET_';
 
@@ -34,16 +34,19 @@ function generateReducerTemplates(keys, initialState = false) {
 
 // 示例对象
 const actionKeys = {
+    trainNumber: null,
+    departStation: null,
+    arriveStation: null,
+    seatType: null,
     departDate: Date.now(),
     arriveDate: Date.now(),
     departTimeStr: null,
     arriveTimeStr: null,
-    departStation: null,
-    arriveStation: null,
-    trainNumber: null,
     durationStr: null,
-    tickets: [],
-    isScheduleVisible: false,
+    price: null,
+    passengers: [],
+    menu: null,
+    isMenuVisible: false,
     searchParsed: false,
 };
 

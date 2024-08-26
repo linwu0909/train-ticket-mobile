@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import './Candidate.css';
 
 const Channel = memo(function Channel(props) {
-    const { name, desc, type } = props;
+    const { name, type } = props;
     const {
         trainNumber,
         departStation,

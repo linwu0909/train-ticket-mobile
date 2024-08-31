@@ -29,9 +29,9 @@ import Slider from './Slider.jsx';
 const Filter = memo(function Filter(props) {
     const { name, checked, toggle, value } = props;
     return (
-        <li className={classnames({ checked })} onClick={() => toggle(value)}>
-            {name}
-        </li>
+      <li className={classnames({ checked })} onClick={() => toggle(value)}>
+        {name}
+      </li>
     );
 });
 
@@ -57,12 +57,12 @@ const Option = memo(function Option(props) {
         [checkedMap, update]
     );
     return (
-        <div className="option">
-            <h3>{title}</h3>
-            <ul>
-                {options.map(option => {
+      <div className="option">
+        <h3>{title}</h3>
+        <ul>
+          {options.map(option => {
                     return (
-                        <Filter
+                      <Filter
                             key={option.value}
                             {...option}
                             checked={option.value in checkedMap}
@@ -70,8 +70,8 @@ const Option = memo(function Option(props) {
                         />
                     );
                 })}
-            </ul>
-        </div>
+        </ul>
+      </div>
     );
 });
 
@@ -230,44 +230,44 @@ const BottomModal = memo(function BottomModal(props) {
     // }
 
     return (
-        <div className="bottom-modal">
-            <div className="bottom-dialog">
-                <div className="bottom-dialog-content">
-                    <div className="title">
-                        <span
+      <div className="bottom-modal">
+        <div className="bottom-dialog">
+          <div className="bottom-dialog-content">
+            <div className="title">
+              <span
                             className={classnames('reset', {
                                 disabled: isResetDisabled,
                             })}
                             onClick={reset}
                         >
                             重置
-                        </span>
-                        <span className="ok" onClick={sure}>
+              </span>
+              <span className="ok" onClick={sure}>
                             确定
-                        </span>
-                        <div className="options">
-                            {optionGroup.map(group => (
-                                <Option {...group} key={group.title} />
+              </span>
+              <div className="options">
+                {optionGroup.map(group => (
+                  <Option {...group} key={group.title} />
                             ))}
-                            <Slider
+                <Slider
                                 title="出发时间"
                                 currentStartHours={localDepartTimeStart}
                                 currentEndHours={localDepartTimeEnd}
                                 onStartChanged={setLocalDepartTimeStart}
                                 onEndChanged={setLocalDepartTimeEnd}
                             />
-                            <Slider
+                <Slider
                                 title="到达时间"
                                 currentStartHours={localArriveTimeStart}
                                 currentEndHours={localArriveTimeEnd}
                                 onStartChanged={setLocalArriveTimeStart}
                                 onEndChanged={setLocalArriveTimeEnd}
                             />
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     );
 });
 
@@ -350,38 +350,38 @@ export default function Bottom(props) {
     ]);
 
     return (
-        <div className="bottom">
-            <div className="bottom-filters">
-                <span className="item" onClick={toggleOrderType}>
-                    <i className="icon">&#xf065;</i>
-                    {orderType === ORDER_DEPART ? '出发 早→晚' : '耗时 短→长'}
-                </span>
-                <span
+      <div className="bottom">
+        <div className="bottom-filters">
+          <span className="item" onClick={toggleOrderType}>
+            <i className="icon">&#xf065;</i>
+            {orderType === ORDER_DEPART ? '出发 早→晚' : '耗时 短→长'}
+          </span>
+          <span
                     className={classnames('item', { 'item-on': highSpeed })}
                     onClick={toggleHighSpeed}
                 >
-                    <i className="icon">{highSpeed ? '\uf43f' : '\uf43e'}</i>
+            <i className="icon">{highSpeed ? '\uf43f' : '\uf43e'}</i>
                     只看高铁动车
-                </span>
-                <span
+          </span>
+          <span
                     className={classnames('item', { 'item-on': onlyTickets })}
                     onClick={toggleOnlyTickets}
                 >
-                    <i className="icon">{onlyTickets ? '\uf43d' : '\uf43c'}</i>
+            <i className="icon">{onlyTickets ? '\uf43d' : '\uf43c'}</i>
                     只看有票
-                </span>
-                <span
+          </span>
+          <span
                     className={classnames('item', {
                         'item-on': isFiltersVisible || !noChecked,
                     })}
                     onClick={toggleIsFiltersVisible}
                 >
-                    <i className="icon">{noChecked ? '\uf0f7' : '\uf446'}</i>
+            <i className="icon">{noChecked ? '\uf0f7' : '\uf446'}</i>
                     综合筛选
-                </span>
-            </div>
-            {isFiltersVisible && (
-                <BottomModal
+          </span>
+        </div>
+        {isFiltersVisible && (
+        <BottomModal
                     ticketTypes={ticketTypes}
                     trainTypes={trainTypes}
                     departStations={departStations}
@@ -405,7 +405,7 @@ export default function Bottom(props) {
                     toggleIsFiltersVisible={toggleIsFiltersVisible}
                 />
             )}
-        </div>
+      </div>
     );
 }
 

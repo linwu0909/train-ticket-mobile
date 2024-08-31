@@ -177,19 +177,19 @@ function App(props) {
     }
 
     return (
-        <div>
-            <div className="header-wrapper">
-                <Header title={`${from} ➡️ ${to}`} onBack={onBack} />
-            </div>
-            <Nav
+      <div>
+        <div className="header-wrapper">
+          <Header title={`${from} ➡️ ${to}`} onBack={onBack} />
+        </div>
+        <Nav
                 date={departDate}
                 isPrevDisabled={isPrevDisabled}
                 isNextDisabled={isNextDisabled}
                 prev={prev}
                 next={next}
             />
-            <List list={trainList} />
-            <Bottom
+        <List list={trainList} />
+        <Bottom
                 highSpeed={highSpeed}
                 orderType={orderType}
                 onlyTickets={onlyTickets}
@@ -208,7 +208,7 @@ function App(props) {
                 arriveTimeStart={arriveTimeStart}
                 arriveTimeEnd={arriveTimeEnd}
             />
-        </div>
+      </div>
     );
 }
 

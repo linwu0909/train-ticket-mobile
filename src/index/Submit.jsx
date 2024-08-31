@@ -3,10 +3,10 @@ import './Submit.css';
 
 export default function Submit(props) {
     return (
-        <div className="submit">
-            <button type="submit" className="submit-button">
+      <div className="submit">
+        <button type="submit" className="submit-button">
                 搜索
-            </button>
-        </div>
+        </button>
+      </div>
     );
 }

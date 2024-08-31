@@ -101,28 +101,28 @@ function App(props) {
     }, []);
 
     return (
-        <div className="App">
-            <div className="header-wrapper">
-                <Header title="火车票" onBack={onBack} />
-            </div>
-            <form action="./query.html" className="form">
-                <Journey from={from} to={to} {...cbs} />
-                <DepartDate time={departDate} {...departDateCbs} />
-                <HighSpeed highSpeed={highSpeed} {...highSpeedCbs} />
-                <Submit />
-            </form>
-            <CitySelector
+      <div className="App">
+        <div className="header-wrapper">
+          <Header title="火车票" onBack={onBack} />
+        </div>
+        <form action="./query.html" className="form">
+          <Journey from={from} to={to} {...cbs} />
+          <DepartDate time={departDate} {...departDateCbs} />
+          <HighSpeed highSpeed={highSpeed} {...highSpeedCbs} />
+          <Submit />
+        </form>
+        <CitySelector
                 show={isCitySelectorVisible}
                 cityData={cityData}
                 isLoading={isLoadingCityData}
                 {...citySelectorCbs}
             />
-            <DateSelector
+        <DateSelector
                 show={isDateSelectorVisible}
                 {...dateSelectorCbs}
                 onSelect={onSelectDate}
             />
-        </div>
+      </div>
     );
 }
 

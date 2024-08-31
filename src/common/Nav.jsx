@@ -12,25 +12,25 @@ const Nav = memo(function Nav(props) {
         return d.format('M月D日') + d.locale('zh-cn').format('ddd');
     }, [date]);
     return (
-        <div className="nav">
-            <span
+      <div className="nav">
+        <span
                 onClick={prev}
                 className={classnames('nav-prev', {
                     'nav-disabled': isPrevDisabled,
                 })}
             >
                 前一天
-            </span>
-            <span classNames="nav-current">{currentString}</span>
-            <span
+        </span>
+        <span classNames="nav-current">{currentString}</span>
+        <span
                 onClick={next}
                 className={classnames('nav-next', {
                     'nav-disabled': isNextDisabled,
                 })}
             >
                 后一天
-            </span>
-        </div>
+        </span>
+      </div>
     );
 });
 

@@ -1,13 +1,15 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import URI from 'urijs';
 import dayjs from 'dayjs';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Header from '../common/Header.jsx';
 import Detail from '../common/Detail.jsx';
-// import Account from './Account.jsx';
-// import Choose from './Choose.jsx';
-// import Passengers from './Passengers.jsx';
-// import Ticket from './Ticket.jsx';
+import Account from './Account.jsx';
+import Choose from './Choose.jsx';
+import Passengers from './Passengers.jsx';
+import Ticket from './Ticket.jsx';
+import Menu from './Menu.jsx';
 import './App.css';
 import {
     setDepartStation,
@@ -17,6 +19,14 @@ import {
     setDepartDate,
     setSearchParsed,
     fetchInitial,
+    createAdult,
+    createChild,
+    removePassenger,
+    updatePassenger,
+    hideMenu,
+    showGenderMenu,
+    showFollowAdultMenu,
+    showTicketTypeMenu,
 } from './actions';
 
 function App(props) {
@@ -30,10 +40,10 @@ function App(props) {
         departTimeStr,
         arriveTimeStr,
         durationStr,
-        // price,
-        // passengers,
-        // menu,
-        // isMenuVisible,
+        price,
+        passengers,
+        menu,
+        isMenuVisible,
         searchParsed,
         dispatch,
     } = props;
@@ -66,17 +76,50 @@ function App(props) {
         dispatch(fetchInitial(url));
     }, [searchParsed, departStation, arriveStation, seatType, departDate]);
 
+    const passengersCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                createAdult,
+                createChild,
+                removePassenger,
+                updatePassenger,
+                showGenderMenu,
+                showFollowAdultMenu,
+                showTicketTypeMenu,
+            },
+            dispatch
+        );
+    }, []);
+
+    const menuCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                hideMenu,
+            },
+            dispatch
+        );
+    }, []);
+
+    const chooseCbs = useMemo(() => {
+        return bindActionCreators(
+            {
+                updatePassenger,
+            },
+            dispatch
+        );
+    }, []);
+
     if (!searchParsed) {
         return null;
     }
 
     return (
-        <div className="app">
-            <div className="header-wrapper">
-                <Header title="订单填写" onBack={onBack}></Header>
-            </div>
-            <div className="detail-wrapper">
-                <Detail
+      <div className="app">
+        <div className="header-wrapper">
+          <Header title="订单填写" onBack={onBack}></Header>
+        </div>
+        <div className="detail-wrapper">
+          <Detail
                     departDate={departDate}
                     arriveDate={arriveDate}
                     departTimeStr={departTimeStr}
@@ -86,13 +129,20 @@ function App(props) {
                     arriveStation={arriveStation}
                     durationStr={durationStr}
                 >
-                    <span
+            <span
                         style={{ display: 'block' }}
                         className="train-icon"
                     ></span>
-                </Detail>
-            </div>
+          </Detail>
         </div>
+        <Ticket price={price} type={seatType} />
+        <Passengers passengers={passengers} {...passengersCbs} />
+        {passengers.length > 0 && (
+        <Choose passengers={passengers} {...chooseCbs} />
+            )}
+        <Account length={passengers.length} price={price} />
+        <Menu show={isMenuVisible} {...menu} {...menuCbs} />
+      </div>
     );
 }
 

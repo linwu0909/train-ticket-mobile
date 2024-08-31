@@ -6,9 +6,9 @@ import './CitySelector.css';
 const CityItem = memo(function CityItem(props) {
     const { name, onSelect } = props;
     return (
-        <li className="city-li" onClick={() => onSelect(name)}>
-            {name}
-        </li>
+      <li className="city-li" onClick={() => onSelect(name)}>
+        {name}
+      </li>
     );
 });
 
@@ -20,20 +20,20 @@ CityItem.propTypes = {
 const CitySection = memo(function CitySection(props) {
     const { title, cities = [], onSelect } = props;
     return (
-        <ul className="city-ul">
-            <li className="city-li" key="title" data-cate={title}>
-                {title}
-            </li>
-            {cities.map(city => {
+      <ul className="city-ul">
+        <li className="city-li" key="title" data-cate={title}>
+          {title}
+        </li>
+        {cities.map(city => {
                 return (
-                    <CityItem
+                  <CityItem
                         key={city.name}
                         name={city.name}
                         onSelect={onSelect}
                     />
                 );
             })}
-        </ul>
+      </ul>
     );
 });
 
@@ -46,9 +46,9 @@ CitySection.propTypes = {
 const AlphaIndex = memo(function AlphaIndex(props) {
     const { alpha, onClick } = props;
     return (
-        <i className="city-index-item" onClick={() => onClick(alpha)}>
-            {alpha}
-        </i>
+      <i className="city-index-item" onClick={() => onClick(alpha)}>
+        {alpha}
+      </i>
     );
 });
 
@@ -64,11 +64,11 @@ AlphaIndex.propTypes = {
 const CityList = memo(function CityList(props) {
     const { sections, onSelect, toAlpha } = props;
     return (
-        <div className="city-list">
-            <div className="city-cate">
-                {sections.map(section => {
+      <div className="city-list">
+        <div className="city-cate">
+          {sections.map(section => {
                     return (
-                        <CitySection
+                      <CitySection
                             key={section.title}
                             title={section.title}
                             cities={section.citys}
@@ -76,19 +76,19 @@ const CityList = memo(function CityList(props) {
                         />
                     );
                 })}
-            </div>
-            <div className="city-index">
-                {alphabet.map(alpha => {
+        </div>
+        <div className="city-index">
+          {alphabet.map(alpha => {
                     return (
-                        <AlphaIndex
+                      <AlphaIndex
                             key={alpha}
                             alpha={alpha}
                             onClick={toAlpha}
                         />
                     );
                 })}
-            </div>
         </div>
+      </div>
     );
 });
 
@@ -102,9 +102,9 @@ const SuggestItem = memo(function SuggestItem(props) {
     const { name, onClick } = props;
 
     return (
-        <li className="city-suggest-li" onClick={() => onClick(name)}>
-            {name}
-        </li>
+      <li className="city-suggest-li" onClick={() => onClick(name)}>
+        {name}
+      </li>
     );
 });
 
@@ -134,19 +134,19 @@ const Suggest = memo(function Suggest(props) {
     }, [result, searchKey]);
 
     return (
-        <div className="city-suggest">
-            <ul className="city-suggest-ul">
-                {fallBackResult.map(item => {
+      <div className="city-suggest">
+        <ul className="city-suggest-ul">
+          {fallBackResult.map(item => {
                     return (
-                        <SuggestItem
+                      <SuggestItem
                             key={item.display}
                             name={item.display}
                             onClick={onSelect}
                         />
                     );
                 })}
-            </ul>
-        </div>
+        </ul>
+      </div>
     );
 });
 
@@ -186,7 +186,7 @@ const CitySelector = memo(function CitySelector(props) {
         }
         if (cityData) {
             return (
-                <CityList
+              <CityList
                     sections={cityData.cityList}
                     onSelect={onSelect}
                     toAlpha={toAlpha}
@@ -197,41 +197,41 @@ const CitySelector = memo(function CitySelector(props) {
     };
 
     return (
-        <div className={classnames('city-selector', { hidden: !show })}>
-            <div className="city-search">
-                <div className="search-back" onClick={() => onBack()}>
-                    <svg width="42" height="42">
-                        <polyline
+      <div className={classnames('city-selector', { hidden: !show })}>
+        <div className="city-search">
+          <div className="search-back" onClick={() => onBack()}>
+            <svg width="42" height="42">
+              <polyline
                             points="25,13 16,21 25,29"
                             stroke="#fff"
                             strokeWidth="2"
                             fill="none"
                         />
-                    </svg>
-                </div>
-                <div className="search-input-wrapper">
-                    <input
+            </svg>
+          </div>
+          <div className="search-input-wrapper">
+            <input
                         type="text"
                         value={searchKey}
                         className="search-input"
                         placeholder="城市、车站的中文或拼音"
                         onChange={e => setSearchKey(e.target.value)}
                     />
-                </div>
-                <i
+          </div>
+          <i
                     className={classnames('search-clean', {
                         hidden: key.length === 0,
                     })}
                     onClick={() => setSearchKey('')}
                 >
                     &#xf063;
-                </i>
-            </div>
-            {Boolean(key) && (
-                <Suggest searchKey={key} onSelect={key => onSelect(key)} />
-            )}
-            {outputCitySections()}
+          </i>
         </div>
+        {Boolean(key) && (
+        <Suggest searchKey={key} onSelect={key => onSelect(key)} />
+            )}
+        {outputCitySections()}
+      </div>
     );
 });
 
